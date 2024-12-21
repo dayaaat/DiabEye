@@ -1,0 +1,9 @@
+django
+tensorflow
+Pillow
+numpy
+torch
+torchvision
+matplotlib
+keras
+gunicorn

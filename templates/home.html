@@ -1,0 +1,154 @@
+{% extends "app.html" %}
+
+{% block title %}
+    DiabEye, Retinopathy Diabethic Detection
+{% endblock %}
+
+{% block content %}
+    <!-- banner -->
+    <div class="banner banner_section cover_background" >
+        <div class="hero_content ">
+            <div class="container ">
+                <!-- <div class="row"> -->
+                    <h1 class="title" id="faire-le-test">
+                        DiabEye, jaga mata
+                    </h1>
+                    <div class="subtitle w65">
+                        Deteksi dini Retinopati Diabetik dengan mudah dan cepat.
+                    </div>
+                    <a href="{% url 'demo' %}" class="link more" >
+                        <span>Deteksi Sekarang</span>
+                        <svg class="arrow_container">
+                            <use xlink:href="#arrow_right" fill="#4464AD"></use>
+                        </svg>
+                    </a>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- banner -->
+    <!-- what is -->
+    <section class="whatis page_section_medium_padding" id="la-retinopatie-diabetique">
+        <div class="container">
+            <!-- <div class="row"> -->
+                <div class="app_title">
+                    Apa Itu Retinopati Diabetik?
+                </div>
+            <!-- </div> -->
+            <div class="content bg_white">
+                Komplikasi diabetes yang menyerang mata.<br/>
+                <strong>Retinopati Diabetik</strong> disebabkan oleh kerusakan pada pembuluh darah di retina, yaitu jaringan yang terletak di bagian belakang mata. Kerusakan ini terjadi akibat kadar gula darah yang tinggi dan tidak terkontrol dalam jangka waktu lama. <strong> </strong><br/>
+                Gejala awal<strong> Retinopati Diabetik</strong> seringkali tidak disadari, 
+                Beberapa tanda yang perlu diwaspadai antara lain: melihat benda melayang-layang, penglihatan kabur, muncul area gelap pada penglihatan, dan kesulitan membedakan warna. <br/>
+                Deteksi dini <strong>Retinopati Diabetik</strong> sangat penting untuk mencegah kerusakan lebih lanjut dan menyelamatkan penglihatan.  Dengan mengetahui kondisi mata sejak dini, Anda dapat mengambil langkah-langkah pencegahan dan penanganan yang tepat. 
+                <strong></strong>
+            </div>
+        </div>
+    </section>
+    <!-- what is -->
+    <!-- rd stage section -->
+    <section class="stage page_section_big_padding" id="les-quatres-stades">
+        <div class="container">
+            <div class="app_title">
+                Kenali Tahapannya
+            </div>
+            <div class="content">
+                <div class="col">
+                    <div class="img_container">
+                        <img src="../static/images/home/healthy.png" alt="healthy">
+                    </div>
+                    <div class="name">
+                        sehat (healthy)
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="img_container">
+                        <img src="../static/images/home/mild-npdr.png" alt="mild">
+                    </div>
+                    <div class="name">
+                        ringan (mild)
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="img_container">
+                        <img src="../static/images/home/mod-npdr.png" alt="moderate">
+                    </div>
+                    <div class="name">
+                        sedang (moderate)
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="img_container">
+                        <img src="../static/images/home/severe-npdr.png" alt="severe">
+                    </div>
+                    <div class="name">
+                        berat (severe)
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="img_container">
+                        <img src="../static/images/home/pdr.png" alt="proliferate">
+                    </div>
+                    <div class="name">
+                        tingkat lanjut (proliferate)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- rd stage section -->
+    <!-- popular section -->
+    <section class="popular page_section ">
+        <div class="container ">
+            <div class="row">
+                <div class="left">
+                    <div class="app_title">
+                        DiabEye, pilihan para dokter kompeten
+                    </div>
+                </div>
+               <div class="right doctor_image"></div>
+            </div>
+        </div>
+        <div class="section_bottom_radius "></div>
+    </section>
+    <!-- popular section -->
+    <!-- thematic section -->
+    <section class="thematic page_section_medium_padding">
+        <div class="container">
+            <div class="app_title">
+                Tema & Konsep
+            </div>
+            <div class="content">
+                <div class="col">
+                    <div class="bg_white">
+                        <img src="../static/images/home/graph.svg" alt="graph" srcset="">
+                        <div class="name">
+                            Teruji secara ilmiah
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="bg_white">
+                        <img src="../static/images/home/idea.svg" alt="idea" srcset="">
+                        <div class="name">
+                            Terobosan baru
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="bg_white">
+                        <img src="../static/images/home/layout.svg" alt="layout" srcset="">
+                        <div class="name">
+                            Multi-platform
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- thematic section -->
+
+{% endblock %}
+
+

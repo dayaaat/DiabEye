@@ -1,0 +1,169 @@
+{% extends "app.html" %}
+
+{% block title %}
+    Mise en pratique, démonstration
+{% endblock %}
+
+{% block content %}
+  <!-- demo banner -->
+  <div class="custom_banner demo page_section_big_padding">
+    <div class="container">
+        <div class="title">
+            Testing
+            <svg class="icon_container">
+                <!-- <use xlink:href="#demo_icon"></use> -->
+            </svg>
+        </div>
+    </div>
+  </div>
+  <!-- demo banner -->
+  <!-- directives -->
+  <section class="directives page_section_medium_padding" id="instructions">
+    <div class="container">
+        <div class="app_title">
+            Langkah Pengujian
+        </div>
+        <div class="content bg_white">
+            <div class="content_title">
+                Ikuti langkah-langkah berikut: 👇
+            </div>
+            <ul>
+                <li>
+                    <svg>
+                        <use xlink:href="#eye" fill="#ED776B"></use>
+                    </svg>
+                    Pilih citra retina untuk diuji
+                </li>
+                <li>
+                    <svg>
+                        <use xlink:href="#eye" fill="#ED776B"></use>
+                    </svg>
+                    Unggah gambar yang akan diuji
+                </li>
+                <li>
+                    <svg>
+                        <use xlink:href="#eye" fill="#ED776B"></use>
+                    </svg>
+                    Klik untuk melakukan<strong> pengujian </strong> 
+                </li>
+            </ul>
+        </div>
+    </div>
+  </section>
+  <!-- directives -->
+  <!-- mise en pratique -->
+  <section class="pratique page_section_medium_padding" id="demonstration">
+    <div class="container">
+        <div class="app_title">
+            Coba langsung
+        </div>
+        <div class="pdr_pdl">
+            <div class="main_content bg_white">
+                <div class="content">
+                    <div class="col bg_white image_container">
+                        <img src="../static/images/demo/no-image.svg" id="banner" alt="select-img">
+                    </div>
+
+                    <div class="col bg_white select_image_container">
+                        <div class="card">
+                            <div class="card_top">
+                                Klik untuk mengunggah gambar mata 👇 
+                            </div>
+                            <div class="card_center">
+                                <svg class="arrow_container">
+                                    <use xlink:href="#arrow_down"></use>
+                                </svg>
+                            </div>
+                            <div class="card_bottom">
+                                <div class="buttons">
+                                    <form id="upload-form" method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <input type="file" id="image" name="image" accept="image/*">
+                                    </form>
+                                </div>
+                                <div class="result" style="display: none;margin-left: 10%">
+                                    <p style="font-weight: bold;font-size: 24px;color: #3f51b5;" id="disease"></p>
+                                    <p style="font-weight: bold;font-size: 24px;color: #3f51b5;" id="accuracy"></p>
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="card card-body">
+                                            <img id="graph" style="width: 350px">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button_container">
+                    <button class="btn test_button" id="process" onclick="submitForm()">
+                        Mulai tes
+                        <svg>
+                            <use xlink:href="#cloud" fill="#ED776B"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loader_container picture_overlay hidden" id="loader_container">
+        <div class="content">
+            <div class="loader_card bg_white">
+                <div class="loader_text">
+                    Harap tunggu...  <br/>
+                    Pemrosesan gambar sedang berlangsung
+                </div>
+                <div class="loader"></div>
+            </div>
+        </div>
+        <svg id="close_container">
+            <use xlink:href="#close" fill="#fff"></use>
+        </svg>
+    </div>
+  </section>
+  <script>
+function submitForm() {
+    // Ambil elemen form dan file input
+    const form = document.getElementById('upload-form');
+    const fileInput = document.getElementById('image');
+    const formData = new FormData(form);
+
+    // Cek apakah file sudah dipilih
+    if (!fileInput.files.length) {
+        alert('Silakan unggah gambar terlebih dahulu!');
+        return;
+    }
+
+    // Tampilkan loading jika diperlukan
+    document.getElementById('process').innerHTML = 'Memproses...';
+
+    // Kirim form dengan fetch API
+    fetch('/api/', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(`Error: ${data.error}`);
+                document.getElementById('process').innerHTML = 'Mulai Tes';
+                return;
+            }
+
+            // Tampilkan hasil pada elemen result
+            document.getElementById('disease').innerText = `Hasil: ${data.result}`;
+            document.getElementById('accuracy').innerText = `Akurasi: ${data.accuracy.toFixed(2)}%`;
+            document.querySelector('.result').style.display = 'block';
+            document.getElementById('process').innerHTML = 'Mulai Tes';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat memproses gambar.');
+            document.getElementById('process').innerHTML = 'Mulai Tes';
+        });
+}
+
+  </script>
+{% endblock %}
